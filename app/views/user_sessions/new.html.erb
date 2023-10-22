@@ -1,0 +1,27 @@
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+  <%= form_with url: login_path, method: :post do |f| %>
+    <div class="card bg-base-300 shadow-xl max-w-xs w-screen">
+      <div class="card-body">
+        <div class="card-title mb-2">
+          <%= t(:login) %>
+        </div>
+        <% if flash[:alert].present? %>
+          <div class="text-error">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+        <%= render FormFieldComponent.new(form: f, name: :email) do |ffc| %>
+          <% ffc.with_label %>
+          <% ffc.with_text_field %>
+        <% end %>
+        <%= render FormFieldComponent.new(form: f, name: :password) do |ffc| %>
+          <% ffc.with_label %>
+          <% ffc.with_password_field %>
+        <% end %>
+        <div class="card-actions justify-end mt-2">
+          <%= f.submit t(:login), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

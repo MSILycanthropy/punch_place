@@ -28,4 +28,8 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  login: Login
+  logged_in: Login Successful
+  logged_out: Successfully logged out
+  login_failed: Sorry, your username or password is incorrect, please try again
+  please_login: Please login to continue

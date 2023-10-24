@@ -29,17 +29,13 @@ class StudentsController < AuthenticatedController
 
   def edit; end
 
-  def create # rubocop:disable Metrics/MethodLength
+  def create
     @student = Current.school.students.new(student_params)
 
     Current.school.students << @student
 
     if @student.save
-      render turbo_stream: [turbo_stream.remove('new_student'), turbo_stream.append(
-        'student-list',
-        partial: 'students/student',
-        locals: { student: @student }
-      )]
+      render turbo_stream: turbo_stream.remove('new_student')
 
       @student.broadcast_append_to('students',
                                    target: 'student-list',

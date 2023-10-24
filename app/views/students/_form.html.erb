@@ -4,7 +4,7 @@
       <div class="flex items-center gap-4">
         <%= render AvatarComponent.new(name: student.name) %>
         <%= render FormFieldComponent.new(form: f, name: :name) do |ffc| %>
-          <%= ffc.with_text_field %>
+          <%= ffc.with_text_field(autofocus: true, autocomplete: 'off') %>
         <% end %>
       </div>
       <div>

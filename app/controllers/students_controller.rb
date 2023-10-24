@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class StudentsController < AuthenticatedController
-  before_action :set_student, only: %i[edit update]
+  before_action :set_student, only: %i[edit update show]
 
   def index
     @students = Current.school.students
   end
+
+  def show; end
 
   def new; end
 
@@ -21,6 +23,10 @@ class StudentsController < AuthenticatedController
     else
       render :edit, status: :unprocessable_entity
     end
+
+    @student.broadcast_update_to('students',
+                                 partial: 'students/student')
+    @student.broadcast_update(partial: 'students/show')
   end
 
   private

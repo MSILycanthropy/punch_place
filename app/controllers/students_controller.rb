@@ -21,9 +21,9 @@ class StudentsController < AuthenticatedController
     if @student.save
       redirect_to students_path
 
-      @student.broadcast_update_to('students',
-                                   partial: 'students/student')
-      @student.broadcast_update(partial: 'students/show')
+      @student.broadcast_replace_to('students',
+                                    partial: 'students/student')
+      @student.broadcast_replace(partial: 'students/show')
     else
       render :edit, status: :unprocessable_entity
     end

@@ -10,9 +10,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.create(email: 'test@test.test', password: 'test', password_confirmation: 'test')
-
 school = School.create(name: Faker::Educator.secondary_school)
+User.create(email: 'test@test.test', password: 'test', password_confirmation: 'test', school_id: school.id)
 
 rand(10..100).times do
   student = Student.create(name: Faker::Name.name)

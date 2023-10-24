@@ -34,9 +34,11 @@ ActiveRecord::Schema[7.2].define(version: 2023_10_22_175834) do
     t.string "email", null: false
     t.string "crypted_password"
     t.string "salt"
+    t.integer "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["school_id"], name: "index_users_on_school_id"
   end
 
 end

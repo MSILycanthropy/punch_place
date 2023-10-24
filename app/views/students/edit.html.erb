@@ -1,0 +1,16 @@
+<%= turbo_frame_tag @student do %>
+  <%= form_with(model: @student) do |f| %>
+    <div class="flex rounded-xl items-center justify-between gap-4 bg-base-300 p-4 mt-2 shadow-md">
+      <div class="flex items-center gap-4">
+        <%= render AvatarComponent.new(name: @student.name) %>
+        <%= render FormFieldComponent.new(form: f, name: :name) do |ffc| %>
+          <%= ffc.with_text_field %>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to t(:back), students_path, class: 'link link-accent' %>
+        <%= f.submit t(:save), class: 'link link-secondary' %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -33,3 +33,6 @@ en:
   logged_out: Successfully logged out
   login_failed: Sorry, your username or password is incorrect, please try again
   please_login: Please login to continue
+  edit: Edit
+  back: Back
+  save: Save

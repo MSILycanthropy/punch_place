@@ -1,0 +1,9 @@
+<%= turbo_frame_tag student do %>
+  <div class="flex rounded-xl items-center justify-between gap-4 bg-base-300 p-4 mt-2 shadow-md">
+    <div class="flex items-center gap-4">
+      <%= render AvatarComponent.new(name: student.name) %>
+      <div class="font-semibold"><%= student.name %></div>
+    </div>
+    <%= link_to t(:edit), edit_student_path(student), class: 'link link-accent' %>
+  </div>
+<% end %>

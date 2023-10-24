@@ -1,1 +1,5 @@
-Student Index
+<%= turbo_stream_from :students %>
+
+<div class="grid grid-cols-3 gap-4">
+  <%= render @students %>
+</div>

@@ -5,7 +5,11 @@ const config = {
   sourcemap: "external",
   entrypoints: ["app/javascript/application.js"],
   outdir: path.join(process.cwd(), "app/assets/builds"),
-  minify: true,
+  minify: {
+    whitespace: true,
+    identifiers: false,
+    syntax: true,
+  },
 };
 
 const build = async (config) => {

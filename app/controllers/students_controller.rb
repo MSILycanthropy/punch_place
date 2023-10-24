@@ -17,11 +17,37 @@ class StudentsController < AuthenticatedController
 
   def show; end
 
-  def new; end
+  def new
+    @student = Current.school.students.new
+
+    render turbo_stream: turbo_stream.prepend(
+      'student-list',
+      partial: 'students/form',
+      locals: { student: @student }
+    )
+  end
 
   def edit; end
 
-  def create; end
+  def create # rubocop:disable Metrics/MethodLength
+    @student = Current.school.students.new(student_params)
+
+    Current.school.students << @student
+
+    if @student.save
+      render turbo_stream: [turbo_stream.remove('new_student'), turbo_stream.append(
+        'student-list',
+        partial: 'students/student',
+        locals: { student: @student }
+      )]
+
+      @student.broadcast_append_to('students',
+                                   target: 'student-list',
+                                   partial: 'students/student')
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
 
   def update
     @student.assign_attributes(student_params)

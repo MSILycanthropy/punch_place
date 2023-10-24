@@ -6,6 +6,9 @@
         <%= link_to student.name, student, class: 'link' %>
       </div>
     </div>
-    <%= link_to t(:edit), edit_student_path(student), class: 'link link-accent' %>
+    <div>
+      <%= link_to t(:edit), edit_student_path(student), class: 'link link-accent' %>
+      <%= link_to t(:delete), student_path(student), data: { turbo_method: :delete }, class: 'link link-error' %>
+    </div>
   </div>
 <% end %>

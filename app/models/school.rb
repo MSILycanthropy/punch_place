@@ -3,6 +3,6 @@
 class School < ApplicationRecord
   validates :name, presence: true
 
-  has_many :schools_students, dependent: :destroy
-  has_many :students, through: :schools_students
+  has_many :school_students, dependent: :destroy
+  has_many :students, through: :school_students
 end

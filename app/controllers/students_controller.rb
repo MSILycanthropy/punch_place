@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StudentsController < AuthenticatedController
-  before_action :set_student, only: %i[edit update show]
+  before_action :set_student, only: %i[edit update show destroy]
 
   def index
     @students = Current.school.students
@@ -27,6 +27,12 @@ class StudentsController < AuthenticatedController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @student.destroy!
+
+    @student.broadcast_remove_to('students')
   end
 
   private

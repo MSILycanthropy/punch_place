@@ -20,13 +20,13 @@ class StudentsController < AuthenticatedController
 
     if @student.save
       redirect_to students_path
+
+      @student.broadcast_update_to('students',
+                                   partial: 'students/student')
+      @student.broadcast_update(partial: 'students/show')
     else
       render :edit, status: :unprocessable_entity
     end
-
-    @student.broadcast_update_to('students',
-                                 partial: 'students/student')
-    @student.broadcast_update(partial: 'students/show')
   end
 
   private

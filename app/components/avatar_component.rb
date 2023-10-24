@@ -21,7 +21,7 @@ class AvatarComponent < ApplicationComponent
   private
 
   def avatar_uri(name)
-    initial = name.first
+    initial = name.first.presence || '💩'
     InitialAvatar.avatar_data_uri(initial)
   end
 end

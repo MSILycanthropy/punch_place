@@ -1,14 +1,12 @@
-<%= turbo_frame_tag student do %>
-  <div class="flex rounded-xl items-center justify-between gap-4 bg-base-300 p-4 mt-2 shadow-md">
-    <div class="flex items-center gap-4">
-      <%= render AvatarComponent.new(name: student.name) %>
-      <div class="font-semibold">
-        <%= link_to student.name, student, class: 'link' %>
-      </div>
-    </div>
-    <div>
-      <%= link_to t(:edit), edit_student_path(student), class: 'link link-accent' %>
-      <%= link_to t(:delete), student_path(student), data: { turbo_method: :delete }, class: 'link link-error' %>
+<div class="flex rounded-xl items-center justify-between gap-4 bg-base-300 p-4 mt-2 shadow-md">
+  <div class="flex items-center gap-4">
+    <%= render AvatarComponent.new(name: student.name) %>
+    <div class="font-semibold">
+      <%= link_to student.name, student, class: 'link' %>
     </div>
   </div>
-<% end %>
+  <div>
+    <%= link_to t(:edit), edit_student_path(student), class: 'link link-accent' %>
+    <%= link_to t(:delete), student_path(student), class: 'link link-error' %>
+  </div>
+</div>

@@ -19,12 +19,6 @@ class StudentsController < AuthenticatedController
 
   def new
     @student = Current.school.students.new
-
-    render turbo_stream: turbo_stream.prepend(
-      'student-list',
-      partial: 'students/form',
-      locals: { student: @student }
-    )
   end
 
   def edit; end
@@ -35,11 +29,6 @@ class StudentsController < AuthenticatedController
     Current.school.students << @student
 
     if @student.save
-      render turbo_stream: turbo_stream.remove('new_student')
-
-      @student.broadcast_append_to('students',
-                                   target: 'student-list',
-                                   partial: 'students/student')
     else
       render :new, status: :unprocessable_entity
     end
@@ -50,10 +39,6 @@ class StudentsController < AuthenticatedController
 
     if @student.save
       redirect_to students_path
-
-      @student.broadcast_replace_to('students',
-                                    partial: 'students/student')
-      @student.broadcast_replace(partial: 'students/show')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -61,8 +46,6 @@ class StudentsController < AuthenticatedController
 
   def destroy
     @student.destroy!
-
-    @student.broadcast_remove_to('students')
   end
 
   private

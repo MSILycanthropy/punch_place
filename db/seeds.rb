@@ -15,6 +15,8 @@ User.create(email: 'test@test.test', password: 'test', password_confirmation: 't
 
 rand(10..100).times do
   student = Student.create(name: Faker::Name.name)
+  inactive_student = Student.create(name: Faker::Name.name, active: false)
 
   school.students << student
+  school.students << inactive_student
 end

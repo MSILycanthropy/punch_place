@@ -1,5 +1,12 @@
 <%= turbo_stream_from :students %>
 
-<div class="grid grid-cols-3 gap-4">
-  <%= render @students %>
-</div>
+<%= turbo_frame_tag :students, data: { turbo_action: :advance } do %>
+  <div class="tabs tabs-boxed w-fit mt-4">
+    <% %w[active inactive].each do |tab| %>
+      <%= link_to tab.titleize, students_path(state: tab), class: tab_classes(params[:state] == tab) %>
+    <% end %>
+  </div>
+  <div class="grid grid-cols-3 gap-4">
+    <%= render @students %>
+  </div>
+<% end %>

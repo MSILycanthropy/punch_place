@@ -4,7 +4,15 @@ class StudentsController < AuthenticatedController
   before_action :set_student, only: %i[edit update show destroy]
 
   def index
+    state = case params[:state]
+            when 'active'
+              true
+            when 'inactive'
+              false
+            end
+
     @students = Current.school.students
+    @students = @students.where(active: state) if params[:state].present?
   end
 
   def show; end
